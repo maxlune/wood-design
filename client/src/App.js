@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import ListFurnitures from "./components/ListFurnitures";
 
 function App() {
   const [authors, setAuthors] = useState([]);
@@ -16,6 +17,7 @@ function App() {
       {authors.map((author, index) => (
         <p key={index}>{author.name}</p>
       ))}
+      <ListFurnitures />
     </div>
   );
 }

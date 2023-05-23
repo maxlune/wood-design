@@ -1,4 +1,4 @@
-import authors from './routers/authors.js';
+import furnitures from './routers/furnitures.js';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -19,7 +19,8 @@ app.locals.pretty = NODE_ENV !== 'production' ? true : false;
 
 // Déclaration des routeurs et middlewares
 app.use(express.urlencoded({ extended: false })); // Fourni l'objet "req.body" lors de la validation de formulaire
-app.use('/author', authors);
+// app.use('/author', authors);
+app.use('/furnitures', furnitures);
 
 try {
   await mongoose.connect(MONGO_URI);

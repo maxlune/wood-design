@@ -1,4 +1,4 @@
-import Author from '../models/Author.js';
+import Furnitures from '../models/Furniture.model.js';
 import { Router } from 'express';
 
 const appRouter = new Router();
@@ -15,30 +15,30 @@ appRouter.get("/add/:name", async (req, res) => {
 */
 
 appRouter.get('/add', (req, res) => {
-  res.render('addAuthor');
+  res.render('addFurnitures');
 });
 
 appRouter.post('/add', async (req, res) => {
-  const { author_name } = req.body;
+  const { furnitures_name } = req.body;
 
-  if (!author_name) {
+  if (!furnitures_name) {
     return res.status(400).send('Le nom ne peut être vide');
   }
 
   try {
-    await Author.create({
-      name: author_name,
+    await Furnitures.create({
+      name: furnitures_name,
     });
-    res.status(201).send('Document inséré');
+    res.status(201).send('Meuble crée');
   } catch (err) {
     console.log(err);
-    res.status(500).send("Impossible d'insérer le document");
+    res.status(500).send('Impossible de crée le meuble');
   }
 });
 
 appRouter.get('/list', async (req, res) => {
-  const authors = await Author.find();
-  res.json(authors);
+  const furnitures = await Furnitures.find();
+  res.json(furnitures);
 });
 
 export default appRouter;
