@@ -2,11 +2,14 @@ import authors from './routers/authors.js';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
+import cors from 'cors';
 dotenv.config();
 
 const { APP_HOST, APP_PORT, MONGO_URI, NODE_ENV } = process.env;
 
 const app = express();
+
+app.use(cors({ origin: '*' }));
 
 // Déclarer le moteur de rendu à Express
 app.set('view engine', 'pug');
