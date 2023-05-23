@@ -1,4 +1,4 @@
-import { Schema, SchemaTypes, Types, model } from "mongoose"
+import { Schema, SchemaTypes, Types, model } from 'mongoose';
 
 const authorSchema = Schema(
   {
@@ -6,7 +6,7 @@ const authorSchema = Schema(
     name: { type: String, required: true },
   }
   // { versionKey: false } // Permet de supprimer le "__v" si besoin
-)
+);
 
-const collectionName = "authors"
-export default model("Author", authorSchema, collectionName)
+const collectionName = 'authors';
+export default model('Author', authorSchema, collectionName);
