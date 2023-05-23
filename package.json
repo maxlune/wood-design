@@ -1,7 +1,7 @@
 {
-  "name": "base-projet-node",
+  "name": "wood-design",
   "version": "1.0.0",
-  "description": "Base de projet Node.js avec Express",
+  "description": "Projet wood-design",
   "main": "server.js",
   "scripts": {
     "start": "nodemon --ignore '*.json' server.js"
