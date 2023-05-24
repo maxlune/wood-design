@@ -1,11 +1,11 @@
-import authors from './routers/authors.js';
+import furnitures from './routers/furnitures.js';
 import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 dotenv.config();
 
-const { APP_HOST, APP_PORT, MONGO_URI, NODE_ENV } = process.env;
+const { APP_HOST, APP_PORT, MONGO_URI } = process.env;
 
 const app = express();
 
@@ -15,11 +15,11 @@ app.use(cors({ origin: '*' }));
 app.set('view engine', 'pug');
 
 // Minifier automatiquement les templates PUG en production, mais pas en dev
-app.locals.pretty = NODE_ENV !== 'production' ? true : false;
+// app.locals.pretty = NODE_ENV !== 'production' ? true : false;
 
 // Déclaration des routeurs et middlewares
 app.use(express.urlencoded({ extended: false })); // Fourni l'objet "req.body" lors de la validation de formulaire
-app.use('/author', authors);
+app.use('/', furnitures);
 
 try {
   await mongoose.connect(MONGO_URI);
