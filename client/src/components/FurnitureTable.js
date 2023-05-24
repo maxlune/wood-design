@@ -24,6 +24,7 @@ function FurnituresList() {
         <TableHead>
           <TableRow>
             <TableCell>Nom du meuble</TableCell>
+            <TableCell>ID</TableCell>
             <TableCell>Categorie</TableCell>
             <TableCell>Materieux</TableCell>
             <TableCell>Entreprise</TableCell>
