@@ -19,6 +19,8 @@ app.set('view engine', 'pug');
 
 // Déclaration des routeurs et middlewares
 app.use(express.urlencoded({ extended: false })); // Fourni l'objet "req.body" lors de la validation de formulaire
+app.use(express.json());
+
 app.use('/', furnitures);
 
 try {
