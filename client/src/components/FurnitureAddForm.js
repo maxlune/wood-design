@@ -17,9 +17,12 @@ function refreshPage() {
   window.location.reload(true);
 }
 
-function FurnitureAddForm() {
+function FurnitureAddForm({ onSubmit, initialData, isUpdate }) {
   const [furnitureName, setFurnitureName] = useState("");
   const [error, setError] = useState(false);
+
+  const [initialMaterials, setInitialMaterials] = useState(null);
+  const [initialCompanies, setInitialCompanies] = useState(null);
 
   const [category, setCategory] = React.useState("");
   const [selectedMaterial, setSelectedMaterial] = useState(null);
@@ -62,7 +65,24 @@ function FurnitureAddForm() {
           }))
         )
       );
-  }, []);
+
+    if (initialData) {
+      setFurnitureName(initialData.name);
+      setCategory(initialData.category._id);
+      setInitialMaterials(
+        initialData.materials.map((material) => ({
+          value: material._id,
+          label: material.name,
+        }))
+      );
+      setInitialCompanies(
+        initialData.companies.map((company) => ({
+          value: company._id,
+          label: company.name,
+        }))
+      );
+    }
+  }, [initialData]);
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -80,8 +100,20 @@ function FurnitureAddForm() {
         ? selectedCompany.map((item) => item.value)
         : [];
 
-      fetch("http://localhost:1337/api/furniture/", {
-        method: "POST",
+      onSubmit({
+        name: furnitureName,
+        category: category,
+        materials: materials,
+        companies: companies,
+      });
+
+      const url = isUpdate
+        ? `http://localhost:1337/api/furniture/${initialData._id}`
+        : "http://localhost:1337/api/furniture/";
+      const method = isUpdate ? "PUT" : "POST";
+
+      fetch(url, {
+        method: method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -151,7 +183,7 @@ function FurnitureAddForm() {
           placeholder={"Choisir un matériau"}
           options={materials}
           isMulti
-          value={selectedMaterial}
+          value={selectedMaterial || initialMaterials}
           onChange={setSelectedMaterial}
         />
       </div>
@@ -160,11 +192,12 @@ function FurnitureAddForm() {
         placeholder={"Choisir une entreprise"}
         options={companies}
         isMulti
-        value={selectedCompany}
+        value={selectedCompany || initialCompanies}
         onChange={setSelectedCompany}
       />
       <Button sx={style} type="submit" variant="contained">
-        Ajouter un meuble
+        {/* Ajouter un meuble */}
+        {isUpdate ? "Mettre à jour le meuble" : "Ajouter un mauble"}
       </Button>
     </form>
   );

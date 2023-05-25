@@ -1,7 +1,5 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import FurnitureAddForm from "./FurnitureAddForm";
 
@@ -16,21 +14,28 @@ const style = {
   width: 400,
 };
 
-const styleButton = {
-  top: "5px",
-  color: "white",
-};
+export default function AddFurnitureModal({
+  furniture,
+  onUpdate,
+  open,
+  onClose,
+}) {
+  const isUpdate = !!furniture;
 
-export default function AddFurnitureModal() {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    }
+  };
+  const handleSubmit = (data) => {
+    if (isUpdate && onUpdate) {
+      onUpdate(furniture._id, data);
+    }
+    handleClose();
+  };
 
   return (
     <div>
-      <Button sx={styleButton} onClick={handleOpen}>
-        Ajouter un meuble
-      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -38,7 +43,11 @@ export default function AddFurnitureModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <FurnitureAddForm />
+          <FurnitureAddForm
+            initialData={furniture}
+            onSubmit={handleSubmit}
+            isUpdate={isUpdate}
+          />
         </Box>
       </Modal>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,7 +11,15 @@ const style = {
   width: 50,
 };
 
+const styleButton = {
+  color: "white",
+};
+
 export default function ButtonAppBar() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -20,7 +28,10 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Wood Design
           </Typography>
-          <AddFurnitureModal />
+          <Button style={styleButton} onClick={handleOpen}>
+            Ajouter un meuble
+          </Button>
+          <AddFurnitureModal open={open} onClose={handleClose} />
         </Toolbar>
       </AppBar>
     </Box>
