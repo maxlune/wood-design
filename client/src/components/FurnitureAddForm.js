@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import Input from "@mui/material/Input";
@@ -13,22 +13,6 @@ const style = {
   mt: 3,
 };
 
-const optionsMaterials = [
-  { value: "frêne", label: "frêne" },
-  { value: "chêne", label: "chêne" },
-  { value: "noyer", label: "noyer" },
-  { value: "acier", label: "acier" },
-  { value: "inox", label: "inox" },
-  { value: "aluminum", label: "aluminum" },
-  { value: "plastique", label: "plastique" },
-];
-
-const optionsCompany = [
-  { value: "BBois", label: "BBois" },
-  { value: "MetaLo", label: "MetaLo" },
-  { value: "pPlastique", label: "pPlastique" },
-];
-
 function refreshPage() {
   window.location.reload(true);
 }
@@ -36,9 +20,49 @@ function refreshPage() {
 function FurnitureAddForm() {
   const [furnitureName, setFurnitureName] = useState("");
   const [error, setError] = useState(false);
+
   const [category, setCategory] = React.useState("");
   const [selectedMaterial, setSelectedMaterial] = useState(null);
   const [selectedCompany, setSelectedCompany] = useState(null);
+
+  const [categories, setCategories] = useState([]);
+  const [materials, setMaterials] = useState([]);
+  const [companies, setCompanies] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:1337/api/categories")
+      .then((res) => res.json())
+      .then((data) =>
+        setCategories(
+          data.map((category) => ({
+            value: category._id,
+            label: category.name,
+          }))
+        )
+      );
+
+    fetch("http://localhost:1337/api/materials")
+      .then((res) => res.json())
+      .then((data) =>
+        setMaterials(
+          data.map((material) => ({
+            value: material._id,
+            label: material.name,
+          }))
+        )
+      );
+
+    fetch("http://localhost:1337/api/companies")
+      .then((res) => res.json())
+      .then((data) =>
+        setCompanies(
+          data.map((company) => ({
+            value: company._id,
+            label: company.name,
+          }))
+        )
+      );
+  }, []);
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -49,12 +73,24 @@ function FurnitureAddForm() {
     if (furnitureName === "") {
       setError(true);
     } else {
+      const materials = selectedMaterial
+        ? selectedMaterial.map((item) => item.value)
+        : [];
+      const companies = selectedCompany
+        ? selectedCompany.map((item) => item.value)
+        : [];
+
       fetch("http://localhost:1337/api/furniture/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name: furnitureName }),
+        body: JSON.stringify({
+          name: furnitureName,
+          category: category,
+          materials: materials,
+          companies: companies,
+        }),
       })
         .then((response) => {
           if (!response.ok) {
@@ -102,15 +138,18 @@ function FurnitureAddForm() {
           label="Category"
           onChange={handleChange}
         >
-          <MenuItem value={10}>Armoire</MenuItem>
-          <MenuItem value={20}>Etagère</MenuItem>
+          {categories.map((category) => (
+            <MenuItem key={category.value} value={category.value}>
+              {category.label}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       {/* Materials */}
       <div style={{ marginBottom: "20px" }}>
         <ReactSelect
           placeholder={"Choisir un matériau"}
-          options={optionsMaterials}
+          options={materials}
           isMulti
           value={selectedMaterial}
           onChange={setSelectedMaterial}
@@ -119,7 +158,7 @@ function FurnitureAddForm() {
       {/* Company */}
       <ReactSelect
         placeholder={"Choisir une entreprise"}
-        options={optionsCompany}
+        options={companies}
         isMulti
         value={selectedCompany}
         onChange={setSelectedCompany}
