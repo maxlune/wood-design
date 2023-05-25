@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import AddFurnitureModal from "../components/AddFurnitureModal";
+import { Button } from "@mui/material";
 
 function FurnituresList() {
   const [furnitures, setFurnitures] = useState([]);
@@ -16,6 +17,21 @@ function FurnituresList() {
       .then((res) => res.json())
       .then((data) => setFurnitures(data));
   }, []);
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:1337/api/furniture/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Erreur lors de la suppression");
+        }
+        setFurnitures(furnitures.filter((furniture) => furniture._id !== id));
+      })
+      .catch((error) => {
+        console.error("Error", error);
+      });
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -27,6 +43,7 @@ function FurnituresList() {
             <TableCell>Type de meuble</TableCell>
             <TableCell>Materiaux</TableCell>
             <TableCell>Entreprise</TableCell>
+            <TableCell>Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -45,6 +62,15 @@ function FurnituresList() {
                 {furniture.companies
                   .map((companie) => companie.name)
                   .join(", ")}
+              </TableCell>
+              <TableCell>
+                <Button
+                  variant="contained"
+                  onClick={() => handleDelete(furniture._id)}
+                  color="error"
+                >
+                  X
+                </Button>
               </TableCell>
             </TableRow>
           ))}
