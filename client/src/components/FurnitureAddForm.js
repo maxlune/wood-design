@@ -81,6 +81,18 @@ function FurnitureAddForm({ onSubmit, initialData, isUpdate }) {
           label: company.name,
         }))
       );
+      setSelectedMaterial(
+        initialData.materials.map((material) => ({
+          value: material._id,
+          label: material.name,
+        }))
+      );
+      setSelectedCompany(
+        initialData.companies.map((company) => ({
+          value: company._id,
+          label: company.name,
+        }))
+      );
     }
   }, [initialData]);
 
