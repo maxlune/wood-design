@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../views/Home";
-import Material from "../views/Material";
+import MaterialDetails from "../views/Material";
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +9,7 @@ export const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/material",
-    element: <Material />,
+    path: "/material/:id",
+    element: <MaterialDetails />,
   },
 ]);

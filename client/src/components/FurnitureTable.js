@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -6,7 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import AddFurnitureModal from "../components/AddFurnitureModal";
 
 function FurnituresList() {
   const [furnitures, setFurnitures] = useState([]);
@@ -37,14 +37,18 @@ function FurnituresList() {
               </TableCell>
               <TableCell>{furniture.category.name}</TableCell>
               <TableCell>
-                {furniture.materials
-                  .map((material) => material.name)
-                  .join(", ")}
+                {furniture.materials.map((material) => (
+                  <Link
+                    to={`/material/${material._id}`}
+                    key={material._id}
+                    style={{ marginRight: "5px" }}
+                  >
+                    {material.name}
+                  </Link>
+                ))}
               </TableCell>
               <TableCell>
-                {furniture.companies
-                  .map((companie) => companie.name)
-                  .join(", ")}
+                {furniture.companies.map((company) => company.name).join(", ")}
               </TableCell>
             </TableRow>
           ))}

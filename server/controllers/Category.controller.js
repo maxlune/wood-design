@@ -1,5 +1,6 @@
 import CategoryService from '../services/Category.service.js';
 
+
 const categoryService = new CategoryService();
 
 export const getAllCategories = async (_req, res) => {

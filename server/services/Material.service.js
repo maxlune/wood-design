@@ -5,6 +5,11 @@ class MaterialService {
     const materials = await Material.find({});
     return materials;
   }
+
+  async getMaterialById(id) {
+    const material = await Material.findById(id);
+    return material;
+  }
 }
 
 export default MaterialService;
