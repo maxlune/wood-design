@@ -9,7 +9,10 @@ class FurnitureService {
 
   async getAllFurnitures() {
     // Récupérer tous les meubles
-    const furnitures = await Furniture.find({});
+    const furnitures = await Furniture.find({})
+      .populate('category')
+      .populate('materials')
+      .populate('companies');
     return furnitures;
   }
 
@@ -17,7 +20,7 @@ class FurnitureService {
     // Mettre à jour le meuble
     const furniture = await Furniture.findByIdAndUpdate(id, updatedFurniture, {
       new: true,
-    });
+    }).populate('category materials companies');
     return furniture;
   }
 
