@@ -13,6 +13,7 @@ const style = {
   bgcolor: "background.paper",
   boxShadow: 24,
   p: 4,
+  width: 400,
 };
 
 const styleButton = {

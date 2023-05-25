@@ -25,8 +25,8 @@ function FurnituresList() {
           <TableRow>
             <TableCell>Nom du meuble</TableCell>
             <TableCell>ID</TableCell>
-            <TableCell>Categorie</TableCell>
-            <TableCell>Materieux</TableCell>
+            <TableCell>Type de meuble</TableCell>
+            <TableCell>Materiaux</TableCell>
             <TableCell>Entreprise</TableCell>
           </TableRow>
         </TableHead>
