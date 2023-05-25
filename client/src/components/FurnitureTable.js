@@ -24,7 +24,6 @@ function FurnituresList() {
         <TableHead>
           <TableRow>
             <TableCell>Nom du meuble</TableCell>
-            <TableCell>ID</TableCell>
             <TableCell>Type de meuble</TableCell>
             <TableCell>Materiaux</TableCell>
             <TableCell>Entreprise</TableCell>
@@ -36,7 +35,17 @@ function FurnituresList() {
               <TableCell component="th" scope="row">
                 {furniture.name}
               </TableCell>
-              <TableCell>{furniture._id}</TableCell>
+              <TableCell>{furniture.category.name}</TableCell>
+              <TableCell>
+                {furniture.materials
+                  .map((material) => material.name)
+                  .join(", ")}
+              </TableCell>
+              <TableCell>
+                {furniture.companies
+                  .map((companie) => companie.name)
+                  .join(", ")}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
