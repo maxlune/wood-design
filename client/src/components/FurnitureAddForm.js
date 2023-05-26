@@ -209,7 +209,7 @@ function FurnitureAddForm({ onSubmit, initialData, isUpdate }) {
       />
       <Button sx={style} type="submit" variant="contained">
         {/* Ajouter un meuble */}
-        {isUpdate ? "Mettre à jour le meuble" : "Ajouter un mauble"}
+        {isUpdate ? "Mettre à jour le meuble" : "Ajouter un meuble"}
       </Button>
     </form>
   );
