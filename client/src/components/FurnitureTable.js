@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -71,10 +72,21 @@ function FurnituresList() {
                   {furniture.name}
                 </TableCell>
                 <TableCell>{furniture.category.name}</TableCell>
-                <TableCell>
+                {/* <TableCell>
                   {furniture.materials
                     .map((material) => material.name)
                     .join(", ")}
+                </TableCell> */}
+                <TableCell>
+                  {furniture.materials.map((material) => (
+                    <Link
+                      to={`/material/${material._id}`}
+                      key={material._id}
+                      style={{ marginRight: "5px" }}
+                    >
+                      {material.name}
+                    </Link>
+                  ))}
                 </TableCell>
                 <TableCell>
                   {furniture.companies
