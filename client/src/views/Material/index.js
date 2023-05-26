@@ -19,9 +19,8 @@ function MaterialDetails() {
   return (
     <div>
       <ButtonAppBar />
-      <h2>Détails du matériau</h2>
-      <p>Nom : {materialData.name}</p>
-      <p>{materialData.description}</p>
+      <h2 style={{ textAlign: "center" }}>{materialData.name}</h2>
+      <p style={{ padding: 15 }}>{materialData.description}</p>
       <ul>
         {materialData.attributes &&
           materialData.attributes.map((attribute) => (

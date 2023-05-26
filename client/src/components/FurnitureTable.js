@@ -77,7 +77,11 @@ function FurnituresList() {
                     <Link
                       to={`/material/${material._id}`}
                       key={material._id}
-                      style={{ marginRight: "5px" }}
+                      style={{
+                        marginRight: "5px",
+                        textDecoration: "none",
+                        color: "black",
+                      }}
                     >
                       {material.name}
                     </Link>
@@ -93,6 +97,7 @@ function FurnituresList() {
                     variant="contained"
                     onClick={() => handleDelete(furniture._id)}
                     color="error"
+                    style={{ marginRight: "10px" }}
                   >
                     Supprimer
                   </Button>

@@ -2,9 +2,12 @@ import mongoose from 'mongoose';
 
 const MaterialSchema = new mongoose.Schema(
   {
-    material: {
+    name: {
       type: String,
       required: true,
+    },
+    description: {
+      type: String,
     },
   },
   { versionKey: false }
