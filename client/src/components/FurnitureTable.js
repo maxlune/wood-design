@@ -72,11 +72,6 @@ function FurnituresList() {
                   {furniture.name}
                 </TableCell>
                 <TableCell>{furniture.category.name}</TableCell>
-                {/* <TableCell>
-                  {furniture.materials
-                    .map((material) => material.name)
-                    .join(", ")}
-                </TableCell> */}
                 <TableCell>
                   {furniture.materials.map((material) => (
                     <Link
