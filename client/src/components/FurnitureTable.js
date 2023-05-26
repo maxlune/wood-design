@@ -73,18 +73,19 @@ function FurnituresList() {
                 </TableCell>
                 <TableCell>{furniture.category.name}</TableCell>
                 <TableCell>
-                  {furniture.materials.map((material) => (
-                    <Link
-                      to={`/material/${material._id}`}
-                      key={material._id}
-                      style={{
-                        marginRight: "5px",
-                        textDecoration: "none",
-                        color: "black",
-                      }}
-                    >
-                      {material.name}
-                    </Link>
+                  {furniture.materials.map((material, index) => (
+                    <React.Fragment key={material._id}>
+                      <Link
+                        to={`/material/${material._id}`}
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                      >
+                        {material.name}
+                      </Link>
+                      {index < furniture.materials.length - 1 && ", "}
+                    </React.Fragment>
                   ))}
                 </TableCell>
                 <TableCell>
