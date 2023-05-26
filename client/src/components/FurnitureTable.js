@@ -10,6 +10,10 @@ import Paper from "@mui/material/Paper";
 import AddFurnitureModal from "../components/AddFurnitureModal";
 import { Button } from "@mui/material";
 
+const style = {
+  fontWeight: "bold",
+};
+
 function FurnituresList() {
   const [furnitures, setFurnitures] = useState([]);
   const [selectedFurniture, setSelectedFurniture] = useState(null);
@@ -58,11 +62,11 @@ function FurnituresList() {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Nom du meuble</TableCell>
-              <TableCell>Type de meuble</TableCell>
-              <TableCell>Materiaux</TableCell>
-              <TableCell>Entreprise</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell style={style}>Nom du meuble</TableCell>
+              <TableCell style={style}>Type de meuble</TableCell>
+              <TableCell style={style}>Materiaux</TableCell>
+              <TableCell style={style}>Entreprise</TableCell>
+              <TableCell style={style}>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
